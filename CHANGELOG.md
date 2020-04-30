@@ -6,12 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 ### Added
 - Large image previews ([#87](https://github.com/Tunous/Dawn/pull/87))
+- Inline text selection ([#177](https://github.com/Tunous/Dawn/pull/177))
 
 ### Changed
 - Renamed application to "Dawn" ([#74](https://github.com/Tunous/Dawn/pull/74))
+- Wrap comment byline when it is too long to fit in one line  ([#145](https://github.com/Tunous/Dawn/pull/145))
 
 ### Fixed
 - Occasional crash when entering login screen ([#103](https://github.com/Tunous/Dawn/pull/103))
+- Crash when navigating to user profile ([#109](https://github.com/Tunous/Dawn/pull/109))
 
 ## [0.8.0] - 2019-08-22
 ### Added
