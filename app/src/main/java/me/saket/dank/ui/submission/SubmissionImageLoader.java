@@ -119,7 +119,7 @@ public class SubmissionImageLoader {
       String defaultImageUrl = mediaLink.lowQualityUrl();
       return mediaLink.isGif()
           ? defaultImageUrl
-          : ImageWithMultipleVariants.Companion.of(redditPreviews).findNearestFor(deviceDisplaySize.getWidth(), defaultImageUrl);
+          : ImageWithMultipleVariants.Companion.of(redditPreviews).findNearestUrlFor(deviceDisplaySize.getWidth(), defaultImageUrl);
     }
   }
 

@@ -248,7 +248,7 @@ public class MediaAlbumViewerActivity extends DankActivity implements MediaFragm
             optimizedQualityUrl = activeMediaItem.mediaLink().lowQualityUrl();
           } else {
             ImageWithMultipleVariants imageVariants = ImageWithMultipleVariants.Companion.of(redditSuppliedImages);
-            optimizedQualityUrl = imageVariants.findNearestFor(
+            optimizedQualityUrl = imageVariants.findNearestUrlFor(
                 getResources().getDisplayMetrics().widthPixels,
                 activeMediaItem.mediaLink().lowQualityUrl() /* defaultValue */
             );
@@ -648,7 +648,7 @@ public class MediaAlbumViewerActivity extends DankActivity implements MediaFragm
     Observable<File> optimizedResImageFileStream = getRedditSuppliedImages()
         .flatMapObservable(redditImages -> Observable.create(emitter -> {
           ImageWithMultipleVariants imageVariants = ImageWithMultipleVariants.Companion.of(redditImages);
-          String optimizedQualityImageForDevice = imageVariants.findNearestFor(getDeviceDisplayWidth(), albumItem.mediaLink().lowQualityUrl());
+          String optimizedQualityImageForDevice = imageVariants.findNearestUrlFor(getDeviceDisplayWidth(), albumItem.mediaLink().lowQualityUrl());
 
           FutureTarget<File> optimizedResolutionImageTarget = Glide.with(this)
               .download(optimizedQualityImageForDevice)

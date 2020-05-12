@@ -17,7 +17,25 @@ class ImageWithMultipleVariants private constructor(private val optionalRedditPr
    * Gives preference to higher-res thumbnails if multiple images have the same distance from the preferred width.
    */
   @Suppress("DEPRECATION")
-  fun findNearestFor(preferredWidth: Int): String {
+  fun findNearestUrlFor(preferredWidth: Int): String {
+    val closestImage = findNearestFor(preferredWidth)
+    // Reddit sends HTML-escaped URLs.
+    return Html.fromHtml(closestImage.url).toString()
+  }
+
+  fun findNearestUrlFor(preferredWidth: Int, defaultValue: String): String {
+    if (UrlParser.isGifUrl(defaultValue)) {
+      throw AssertionError("Optimizing GIFs is an error: $defaultValue")
+    }
+
+    return if (optionalRedditPreviews.isPresent) {
+      findNearestUrlFor(preferredWidth)
+    } else {
+      defaultValue
+    }
+  }
+
+  fun findNearestFor(preferredWidth: Int): SubmissionPreview.Variation {
     if (optionalRedditPreviews.isEmpty) {
       throw NoSuchElementException("No reddit supplied images present")
     }
@@ -29,27 +47,14 @@ class ImageWithMultipleVariants private constructor(private val optionalRedditPr
     for (variation in redditPreviews.resolutions) {
       val differenceAbs = abs(preferredWidth - variation.width)
       if (differenceAbs < abs(closestDifference)
-          // If another image is found with the same difference, choose the higher-res image.
-          || differenceAbs == closestDifference && variation.width > closestImage.width) {
+        // If another image is found with the same difference, choose the higher-res image.
+        || differenceAbs == closestDifference && variation.width > closestImage.width
+      ) {
         closestDifference = preferredWidth - variation.width
         closestImage = variation
       }
     }
-
-    // Reddit sends HTML-escaped URLs.
-    return Html.fromHtml(closestImage.url).toString()
-  }
-
-  fun findNearestFor(preferredWidth: Int, defaultValue: String): String {
-    if (UrlParser.isGifUrl(defaultValue)) {
-      throw AssertionError("Optimizing GIFs is an error: $defaultValue")
-    }
-
-    return if (optionalRedditPreviews.isPresent) {
-      findNearestFor(preferredWidth)
-    } else {
-      defaultValue
-    }
+    return closestImage
   }
 
   companion object {
