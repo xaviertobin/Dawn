@@ -10,10 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 ### Fixed
+- Check if user is logged in before allowing replies to a submission ([#215](https://github.com/Tunous/Dawn/pull/215))
 - Fixes for Gfycat and Giphy media ([#211](https://github.com/Tunous/Dawn/issues/211))
 - Fix playing of reddit hosted videos ([#210](https://github.com/Tunous/Dawn/pull/210))
 - Imgur images (up)loading ([#202](https://github.com/Tunous/Dawn/pull/202))
 - Always show fullsize imgur images ([#209](https://github.com/Tunous/Dawn/pull/209))
+- Fix loading of Imgur images ([#202](https://github.com/Tunous/Dawn/pull/202))
 
 ## [0.9.1] - 2020-05-05
 ### Fixed
