@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Support for Redgifs ([#219](https://github.com/Tunous/Dawn/pull/219))
 
 ### Changed
+- New Icon ([#212](https://github.com/Tunous/Dawn/pull/212))
 
 ### Fixed
 - Check if user is logged in before allowing replies to a submission ([#215](https://github.com/Tunous/Dawn/pull/215))
